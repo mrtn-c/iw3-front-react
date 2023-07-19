@@ -1,8 +1,8 @@
 import {useState} from 'react';
 import { Navigate } from 'react-router-dom';
-import LoginError from './Error/LoginError.jsx'
+import LoginRegisterError from './Error/LoginRegisterError.jsx'
 
-const Login = () => {
+const Login = ({setRegister}) => {
   
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -17,7 +17,11 @@ const Login = () => {
         setPassword(event.target.value);
     }
 
-    async function handleLogin() {
+    function handleRegister(event){
+      setRegister(true);
+    }
+
+    async function handleLogin(event) {
         event.preventDefault();
       
       
@@ -55,7 +59,7 @@ const Login = () => {
           <h1 className="font-black text-3xl text-center ">Mugiwaras camiones y productos</h1>
           <form onSubmit={handleLogin} className="bg-white shadow-md rounded-lg py-10 px-5 mt-20 transition-all">
                 {
-                    error && <LoginError>Usuario O Contraseña Incorrecto</LoginError> 
+                    error && <LoginRegisterError>Usuario O Contraseña Incorrecto</LoginRegisterError> 
 
                 }
             <div className="mb-5">
@@ -68,8 +72,11 @@ const Login = () => {
               <input type="password" className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md" value={password} onChange={handlePasswordChange} />
             </div>
             <button type="submit" onClick={handleLogin} 
-            className="bg-indigo-600 p-3 w-full text-white uppercase font-bold hover:bg-indigo-800 cursor-pointer transition-all mb-10">
+            className="bg-blue-600 p-3 w-full text-white uppercase font-bold hover:bg-indigo-800 cursor-pointer transition-all mb-5">
             Iniciar sesión</button>
+            <button type="button" onClick={handleRegister} 
+            className="bg-green-400 p-3 w-full text-white uppercase font-bold hover:bg-green-800 cursor-pointer transition-all mb-5">
+            Registrarse</button>
           </form>
         </div>
       );

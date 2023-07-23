@@ -1,5 +1,5 @@
 import { useState } from "react";
-import LoginRegisterError from "./Error/LoginRegisterError";
+import LoginRegisterError from "../Error/LoginRegisterError";
 import bcrypt from 'bcryptjs'
 
 

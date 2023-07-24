@@ -25,14 +25,6 @@ const OrderTable = () => {
       .catch(error => console.error('Error al obtener los datos:', error));
   }, []);
 
-  // Aplicar filtros a los datos
-  const filteredOrders = orders.filter(order => {
-    // Aplicar filtro de estado si está seleccionado
-    if (order.estado !== filterEstado) {
-      return false;
-    }
-    return true;
-  });
 
   return (
     <div className="px-4 py-8">

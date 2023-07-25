@@ -1,24 +1,38 @@
 import React from 'react'
+import { useState } from 'react';
+import AgregarCliente from './AgregarCliente'
+import ClienteTable from './ClienteTable';
 
 const ClienteTableActions = () => {
-    return (
-        <div className="flex items-center justify-between mt-8">
-        <div>
-          <button className="py-2 px-4 rounded text-white font-semibold transition-all bg-green-400 hover:bg-green-700 ">
-            Agregar
-          </button>
-          <button className="py-2 px-4 rounded text-white font-semibold ml-2 transition-all bg-red-400 hover:bg-red-700">
-            Eliminar
-          </button>
-        </div>
-        <h1 className=" mr-40 text-2xl font-semibold">Clientes</h1>
-        <div>
-          <button className="py-2 px-4 rounded text-white font-semibold ml-2 transition-all bg-blue-500 hover:bg-blue-600">
-            Cambiar Estado
-          </button>
-        </div>
+  const [showForm, setShowForm] = useState(false);
+
+  const handleAgregarClick = () => {
+    setShowForm(true);
+  };
+
+  return (
+    <div>
+    <div className="relative flex items-center justify-between mt-8">
+      {showForm && <AgregarCliente onClose={() => setShowForm(false)} />}
+      {showForm && (
+        <div className="absolute inset-0 bg-white opacity-100  z-20"></div>
+      )}
+       {/**TODO: QUE SE VEA MEJOR LA PARTE DE ATRAS. */}
+      <div>
+        <button
+          className="py-2 px-4 rounded text-white font-semibold transition-all bg-green-400 hover:bg-green-700"
+          onClick={handleAgregarClick}
+        >
+          Agregar Cliente
+        </button>
       </div>
-      )
-    }
+      <div className="flex-auto text-center mr-60">
+        <h2 className="text-xl font-semibold">Clientes</h2>
+      </div>
+      </div>
+    <ClienteTable />
+    </div>
+  );
+};
 
 export default ClienteTableActions

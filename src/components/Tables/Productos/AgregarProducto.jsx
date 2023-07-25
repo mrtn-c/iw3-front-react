@@ -5,12 +5,14 @@ const AgregarProducto = ({ onClose }) => {
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [codigo, setCodigo] = useState('');
+  const [id, setId] = useState(0);
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Obtener el token JWT del localStorage
     const token = localStorage.getItem('token');
-
+    setId(id + 1);
     // Hacer una solicitud POST a la API para agregar un nuevo producto
     fetch('http://mugiwaras.mooo.com/api/producto', {
       method: 'POST', // Cambiar a POST
@@ -19,6 +21,7 @@ const AgregarProducto = ({ onClose }) => {
         'Content-Type': 'application/json' // Especificar el tipo de contenido JSON en el cuerpo
       },
       body: JSON.stringify({
+        "id": id,
         "nombre": nombre,
         "descripcion": descripcion,
         "code": codigo

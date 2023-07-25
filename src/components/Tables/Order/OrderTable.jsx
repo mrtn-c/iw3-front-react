@@ -28,7 +28,6 @@ const OrderTable = () => {
 
   return (
     <div className="px-4 py-8">
-      <h2 className="text-xl font-bold mb-4">Tabla de Productos</h2>
       <div className="mb-4">
         <label htmlFor="filtroEstado" className="mr-2">
           Filtro de Estado:

@@ -74,9 +74,7 @@ const Login = ({setRegister}) => {
             <button type="submit" onClick={handleLogin} 
             className="bg-blue-600 p-3 w-full text-white uppercase font-bold hover:bg-indigo-800 cursor-pointer transition-all mb-5">
             Iniciar sesión</button>
-            <button type="button" onClick={handleRegister} 
-            className="bg-green-400 p-3 w-full rounded-lg text-white uppercase font-bold hover:bg-green-800 cursor-pointer transition-all mb-5">
-            Registrarse</button>
+
           </form>
         </div>
       );

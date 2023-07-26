@@ -26,7 +26,7 @@ const ChoferTableActions = () => {
         </button>
       </div>
       <div className="flex-auto text-center mr-60">
-        <h2 className="text-xl font-semibold">Chofer</h2>
+        <h2 className="text-4xl font-semibold">Choferes</h2>
       </div>
       </div>
     <ChoferTable />

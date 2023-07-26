@@ -26,7 +26,7 @@ const CamionTableActions = () => {
         </button>
       </div>
       <div className="flex-auto text-center mr-60">
-        <h2 className="text-4xl font-semibold">Camion</h2>
+        <h2 className="text-4xl font-semibold">Camiones</h2>
       </div>
       </div>
     <CamionTable />

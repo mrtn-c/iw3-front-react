@@ -29,19 +29,34 @@ const ClienteTable = () => {
     fetchClientesData();
 
     // Llamar a fetchClientesData cada 5 minutos (300,000 milisegundos)
-    const intervalId = setInterval(fetchClientesData, 300000);
+    const intervalId = setInterval(fetchClientesData, 60000);
 
     // Limpiar el intervalo cuando el componente se desmonte para evitar fugas de memoria
     return () => clearInterval(intervalId);
   }, []);
 
+  useEffect(() => {
+    // Actualizar el estado clienteAgregado al montar el componente
+    const codigoClienteAgregado = localStorage.getItem('cliente');
+    setClienteAgregado(codigoClienteAgregado);
+  }, []);
+
   const handleAgregar = (codigo) => {
-    setClienteAgregado(codigo);
-    localStorage.setItem('cliente', codigo);
+    // Si ya está agregado, eliminarlo del localStorage y el estado
+    if (clienteAgregado === codigo) {
+      localStorage.removeItem('cliente');
+      setClienteAgregado(null);
+    } else {
+      // Si no está agregado, guardarlo en el localStorage y el estado
+      localStorage.setItem('cliente', codigo);
+      setClienteAgregado(codigo);
+    }
   };
+
   const tableStyle = {
     backgroundColor: '#ffffff', // Cambia este color por el que desees
   };
+
   return (
     <div className="px-4 py-8">
       <table className="w-full border" style={tableStyle}>
@@ -61,7 +76,8 @@ const ClienteTable = () => {
               <td className="border p-2">{cliente.code}</td>
               <td className="border p-2">
                 {clienteAgregado === cliente.code ? (
-                  <button className='py-1 px-2 mt-1 rounded text-white font-semibold transition-all bg-green-400 hover:bg-green-700'>
+                  <button className='py-1 px-2 mt-1 rounded text-white font-semibold transition-all bg-green-400 hover:bg-green-700'
+                  onClick={() => handleAgregar(cliente.code)}>
                     Agregado
                   </button>
                 ) : (
@@ -82,3 +98,4 @@ const ClienteTable = () => {
 };
 
 export default ClienteTable;
+

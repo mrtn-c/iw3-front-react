@@ -1,4 +1,3 @@
-import { data } from 'autoprefixer';
 import React, { useState } from 'react';
 
 const AgregarProducto = ({ onClose }) => {
@@ -7,7 +6,6 @@ const AgregarProducto = ({ onClose }) => {
   const [codigo, setCodigo] = useState('');
   const [id, setId] = useState(0);
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
     // Obtener el token JWT del localStorage
@@ -15,10 +13,10 @@ const AgregarProducto = ({ onClose }) => {
     setId(id + 1);
     // Hacer una solicitud POST a la API para agregar un nuevo producto
     fetch('http://mugiwaras.mooo.com/api/producto', {
-      method: 'POST', // Cambiar a POST
+      method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json' // Especificar el tipo de contenido JSON en el cuerpo
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         "id": id,
@@ -42,8 +40,12 @@ const AgregarProducto = ({ onClose }) => {
     });
   };
 
+  const handleCancelarClick = () => {
+    onClose();
+  };
+
   return (
-    <div className="fixed top-0 left-0 h-screen w-screen bg-white opacity-80 flex items-center justify-center z-50">
+    <div className="fixed top-0 left-0 h-screen w-screen bg-white flex items-center justify-center z-50">
       <div className="bg-white p-4 rounded-lg shadow-lg">
         <h2 className="text-xl font-semibold mb-4">Agregar Producto</h2>
         <form onSubmit={handleSubmit}>
@@ -78,6 +80,9 @@ const AgregarProducto = ({ onClose }) => {
             />
           </div>
           <div className="flex justify-end">
+            <button type="button" onClick={handleCancelarClick} className="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded mr-2">
+              Cancelar
+            </button>
             <button type="submit" className="bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded">
               Guardar
             </button>
@@ -89,4 +94,5 @@ const AgregarProducto = ({ onClose }) => {
 };
 
 export default AgregarProducto;
+
 

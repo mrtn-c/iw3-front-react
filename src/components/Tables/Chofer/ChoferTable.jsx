@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const ChoferTable = () => {
   const [choferes, setChoferes] = useState([]);
+  const [choferAgregado, setChoferAgregado] = useState(null);
 
   const fetchChoferesData = () => {
     // Obtener el token JWT del localStorage (reemplaza 'NOMBRE_DEL_TOKEN' con el nombre correcto)
@@ -28,18 +29,34 @@ const ChoferTable = () => {
     fetchChoferesData();
 
     // Llamar a fetchChoferesData cada 5 minutos (300,000 milisegundos)
-    const intervalId = setInterval(fetchChoferesData, 300000);
+    const intervalId = setInterval(fetchChoferesData, 60000);
 
     // Limpiar el intervalo cuando el componente se desmonte para evitar fugas de memoria
     return () => clearInterval(intervalId);
   }, []);
 
+  useEffect(() => {
+    // Actualizar el estado choferAgregado al montar el componente
+    const codigoChoferAgregado = localStorage.getItem('chofer');
+    setChoferAgregado(codigoChoferAgregado);
+  }, []);
+
   const handleAgregar = (codigo) => {
-    localStorage.setItem('chofer', codigo);
+    // Si ya está agregado, eliminarlo del localStorage y el estado
+    if (choferAgregado === codigo) {
+      localStorage.removeItem('chofer');
+      setChoferAgregado(null);
+    } else {
+      // Si no está agregado, guardarlo en el localStorage y el estado
+      localStorage.setItem('chofer', codigo);
+      setChoferAgregado(codigo);
+    }
   };
+
   const tableStyle = {
     backgroundColor: '#ffffff', // Cambia este color por el que desees
   };
+
   return (
     <div className="px-4 py-8">
       <table className="w-full border" style={tableStyle}>
@@ -60,15 +77,12 @@ const ChoferTable = () => {
               <td className="border p-2">{chofer.apellido}</td>
               <td className="border p-2">{chofer.code}</td>
               <td className="border p-2">
-                {localStorage.getItem('chofer') === chofer.code ? (
-                  <button className='py-1 px-2 mt-1 rounded text-white font-semibold transition-all bg-green-400 hover:bg-green-700'>
+                {choferAgregado === chofer.code ? (
+                  <button className='py-1 px-2 mt-1 rounded text-white font-semibold transition-all bg-green-400 hover:bg-green-700' onClick={() => handleAgregar(chofer.code)}>
                     Agregado
                   </button>
                 ) : (
-                  <button
-                    className='py-1 px-2 mt-1 rounded text-white font-semibold transition-all bg-green-400 hover:bg-green-700'
-                    onClick={() => handleAgregar(chofer.code)}
-                  >
+                  <button className='py-1 px-2 mt-1 rounded text-white font-semibold transition-all bg-green-400 hover:bg-green-700' onClick={() => handleAgregar(chofer.code)}>
                     Agregar a orden
                   </button>
                 )}

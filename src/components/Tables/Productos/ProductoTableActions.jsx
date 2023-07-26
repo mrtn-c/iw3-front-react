@@ -14,7 +14,7 @@ const ProductoTableActions = () => {
     <div className="relative flex items-center justify-between mt-8">
       {showForm && <AgregarProducto onClose={() => setShowForm(false)} />}
       {showForm && (
-        <div className="absolute inset-0 bg-white opacity-100 z-10"></div>
+        <div className="absolute inset-0 bg-white z-20"></div>
       )}
       <div>
         <button
@@ -25,7 +25,7 @@ const ProductoTableActions = () => {
         </button>
       </div>
       <div className="flex-auto text-center mr-60">
-        <h2 className="text-xl font-semibold">Productos</h2>
+        <h2 className="text-4xl font-semibold">Productos</h2>
       </div>
       </div>
     <ProductoTable />

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import OrderTable from './OrderTable';
 import AgregarOrden from './AgregarOrden';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
+import toast, { Toaster } from 'react-hot-toast';
+
 
 
 const OrderTableActions = () => {
@@ -14,11 +14,17 @@ const OrderTableActions = () => {
     let cliente=localStorage.getItem("cliente")
     let chofer=localStorage.getItem("chofer")
     let producto=localStorage.getItem("producto")
+    let faltante="";
 
     if(camion !=null &&cliente !=null && chofer !=null &&producto !=null){
       setShowForm(true);
     }else{
-      toast.warn('Seleccione todos los items necesarios.'); 
+      faltante+="Cargue todos los items necesarios. Falta:"
+      faltante+=(camion===null)?" Camion ":"";
+      faltante+=(cliente===null)?" Cliente ":"";
+      faltante+=(chofer===null)?" Chofer ":"" ;
+      faltante+=(producto===null)?" Producto ":"";
+            toast.error(faltante)
         }
     
   };
@@ -42,12 +48,11 @@ const OrderTableActions = () => {
         </div>
         <h1 className="mr-40 text-4xl font-semibold">Ordenes</h1>
         <div>
-          <button className="py-2 px-4 rounded text-white font-semibold ml-2 transition-all bg-blue-500 hover:bg-blue-600">
-            Cambiar Estado
-          </button>
+
         </div>
       </div>
       <OrderTable />
+      <Toaster />
     </div>
      
   );

@@ -53,7 +53,7 @@ const AgregarCamion = ({ onClose }) => {
         "patente": patente,
         "descripcion": descripcion,
         "datosCisterna": datosCisterna, // Enviar la lista de cisternas con sus tamanios
-        "totalCisterna": totalCisterna, // Enviar el totalCisterna calculado
+        "totalCisterna": total, // Enviar el totalCisterna calculado
         "code": code
       })
     }).then(response => {

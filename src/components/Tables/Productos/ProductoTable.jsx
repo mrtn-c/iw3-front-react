@@ -24,18 +24,9 @@ const ProductoTable = () => {
       .catch(error => console.error('Error al obtener los datos:', error));
   }, []);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   const code = "pr2"
-  //   // Realizar la solicitud a la API con el token JWT en el encabezado de autorización
-  //   fetch(`http://mugiwaras.mooo.com/api/producto/buscar/${code}`, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`
-  //     }
-  //   })
-
-
-  // }, []);
+  const handleAgregar = (codigo) => {
+    localStorage.setItem('producto' , codigo);
+  }
 
 
   return (
@@ -57,9 +48,22 @@ const ProductoTable = () => {
               <td className="border p-2">{producto.nombre}</td>
               <td className="border p-2">{producto.descripcion}</td>
               <td className="border p-2">{producto.code}</td>
+              {localStorage.getItem('producto') === producto.code ? (
               <td className="border p-2">
-              <button className=' py-1 px-2 mt-1 rounded text-white font-semibold transition-all bg-green-400 hover:bg-green-700'>Agregar a orden</button> {/**DAR LA POSIBILIDAD DE AGREGAR ACA CON LOCAL STORAGE. */}
+                <button className='py-1 px-2 mt-1 rounded text-white font-semibold transition-all bg-green-400 hover:bg-green-700'
+                onClick={() => localStorage.removeItem('producto')}>
+                    Agregado
+                  </button>
+                </td>
+                ):(
+                <td className="border p-2">
+                  <button
+                    className='py-1 px-2 mt-1 rounded text-white font-semibold transition-all bg-green-400 hover:bg-green-700'
+                    onClick={() => handleAgregar(producto.code)}>
+                    Agregar a orden
+                  </button> 
               </td>
+              )}
             </tr>
           ))}
         </tbody>

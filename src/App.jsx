@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes ,Route } from 'react-router-dom';
 import Home from './components/Home.jsx'
 import './App.css'
 import LoginRegister from './components/Login/LoginRegister.jsx';
+import './assets/globalStyles.css'
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -14,6 +16,7 @@ function App() {
         <Route path="/home" element={<Home/>} />
       </Routes>
     </Router>
+   
   )
 }
 

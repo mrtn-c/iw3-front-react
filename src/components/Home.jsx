@@ -15,8 +15,12 @@ const Home = () => {
     setSelectedButton(button);
   };
   
+  const divStyle = {
+    backgroundColor: '#f2f2f2', // Cambia este color por el que desees
+    padding: '20px', // Añade un poco de espacio alrededor del contenido
+  };
   return (
-    <>
+    <div >
     <TabsButtons 
     selectedButton={selectedButton}
     setSelectedButton={setSelectedButton}
@@ -28,7 +32,7 @@ const Home = () => {
     {selectedButton === 4 && <ClienteTableActions />}
     {selectedButton === 5 && <ProductoTableActions />}
 
-    </>
+    </div>
   );
 };
 
